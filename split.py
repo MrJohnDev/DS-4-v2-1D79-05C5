@@ -1,3 +1,5 @@
+import os
+
 def get_data(file,file_out, start, end):
     with open(file, 'rb') as infile:
         infile.seek(start)
@@ -45,11 +47,11 @@ with open('lod/intel.bin') as bin_file:
 
 data = b''
 data = data + get2_data(orig_file,0x0,0x20C1A8)
-data = data + get2_data('lod/nulled.bin',0x0,0xAEB8)
+data = data + get2_data('lod/nulled.bin',0x0,os.stat('lod/nulled.bin').st_size-1)
 data = data + get2_data(orig_file,0x217060,0xF89C00)
 
 
-with open('1.exe', 'wb') as outfile:
+with open('nulled_dont_use.exe', 'wb') as outfile:
     outfile.write(data)
 
 #  994 :103FF000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD1
